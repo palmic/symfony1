@@ -364,7 +364,9 @@ abstract class sfBrowserBase
       }
       else
       {
+		libxml_use_internal_errors(true);
         @$this->dom->loadHTML($response->getContent());
+		libxml_use_internal_errors(false);
       }
       $this->domCssSelector = new sfDomCssSelector($this->dom);
     }
