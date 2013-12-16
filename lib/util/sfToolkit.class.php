@@ -359,7 +359,31 @@ class sfToolkit
    */
   public static function pregtr($search, $replacePairs)
   {
+    /*foreach ($replacePairs as $k => $v) {
+      if (preg_match('/\/e/', $k)) {
+        var_dump($replacePairs);
+        throw new Exception('adasdasd');
+      }
+    }*/
     return preg_replace(array_keys($replacePairs), array_values($replacePairs), $search);
+  }
+
+  /**
+   * updated because of /e preg_replace modifier deprecation in php 5.5
+   */
+  public static function pregtrCallback($search, $replacePairs)
+  {
+    /*foreach ($replacePairs as $k => $v) {
+      if (preg_match('/\/e/', $k)) {
+        var_dump($replacePairs);
+        throw new Exception('adasdasd');
+      }
+    }*/
+    $out = $search;
+    foreach ($replacePairs as $k => $v) {
+      $out = preg_replace_callback($k, $v, $out);
+    }
+    return $out;
   }
 
   /**
